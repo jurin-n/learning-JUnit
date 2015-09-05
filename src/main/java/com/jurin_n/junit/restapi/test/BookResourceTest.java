@@ -10,14 +10,14 @@ public class BookResourceTest extends RestApiTest {
 	public void testCase01() throws IOException {
 	   	/* セットアップ */
 	   	// resource
-		resource = "/expose";
+		resource = "/statuses/user_timeline.json";
 		
 	   	// method
 		method = HttpMethod.GET;
 		
 	   	// headers
-    	headers.put("Content-Type","*");
-    	headers.put("Accept","*");
+    	headers.put("Content-Type","application/json");
+    	headers.put("Accept","application/json");
     	headers.put("Date","xxxx");
     	headers.put("Authorization","xxxx");
 	    	
@@ -29,12 +29,12 @@ public class BookResourceTest extends RestApiTest {
 		
 		/* 検証 */
     	assertThat(
-				response.getHeader("Content-Type")
-				,is("application/json")
+				response.getHeader("content-type")
+				,is("application/json; charset=utf-8")
 				);
 		assertThat(
 				response.getStatusCode()
-				,is(200));
+				,is(400));
 		assertThat(
 				response.getBody()
 				,is(getResourceFile("/case01_expectedBody.json")));	
