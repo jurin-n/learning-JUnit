@@ -32,6 +32,7 @@ public class RestApiTest {
 
 	protected Map<String, String> headers = new HashMap<>();
 	String body;
+	ObjectMapper mapper = new ObjectMapper();
 	
 	protected RestApiTest(){
 		super();
@@ -62,7 +63,6 @@ public class RestApiTest {
 		
 		//bodyTmpには整形したJSONが入る可能性がある。
 		//assertするため改行やスペースなど除去。
-		ObjectMapper mapper = new ObjectMapper();
 		JsonNode jn = mapper.readTree(bodyTmp);
 		return mapper.writeValueAsString(jn);	
 	}
