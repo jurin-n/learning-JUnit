@@ -35,8 +35,9 @@ public class BookResourceTest extends RestApiTest {
 		assertThat(
 				response.getStatusCode()
 				,is(400));
+		String res = getResourceFile("/case01_expectedBody.json");
 		assertThat(
 				response.getBody()
-				,is(getResourceFile("/case01_expectedBody.json")));	
+				,is(res));	
 	}
 }

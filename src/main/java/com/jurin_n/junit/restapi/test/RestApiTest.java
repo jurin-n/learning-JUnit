@@ -19,6 +19,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.util.EntityUtils;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jurin_n.junit.restapi.test.Response;
 
 public class RestApiTest {
@@ -58,7 +60,11 @@ public class RestApiTest {
 			bodyTmp += line;
 		}
 		
-		return bodyTmp;	
+		//bodyTmpには整形したJSONが入る可能性がある。
+		//assertするため改行やスペースなど除去。
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode jn = mapper.readTree(bodyTmp);
+		return mapper.writeValueAsString(jn);	
 	}
 	protected String getRequestBody(String source){
 		try {
