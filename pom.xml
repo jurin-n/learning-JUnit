@@ -16,6 +16,11 @@
     	<version>1.10.19</version>
     	<scope>test</scope>
 	</dependency>
+	<dependency>
+	  <groupId>org.apache.httpcomponents</groupId>
+	  <artifactId>fluent-hc</artifactId>
+	  <version>4.5</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>learning-JUnit2</finalName>
