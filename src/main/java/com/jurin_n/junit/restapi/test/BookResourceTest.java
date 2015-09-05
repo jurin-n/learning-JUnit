@@ -9,17 +9,21 @@ public class BookResourceTest {
 
 	@Test
 	public void test() {
-		//リクエスト＆レスポンス
+		/* セットアップ */
+		//Httpヘッダ
+		headers.put("Content-Type","application/json");
+		headers.put("Accept","application/json");
+		headers.put("Date","xxxx");
+		headers.put("Authorization","xxxx");
+		
+		//リクエスト送信、レスポンス取得
 		response = request.setResource("/hoge")
 						  .setMethod("GET")
-						  .setHeader("Content-Type","application/json")
-						  .setHeader("Accept","application/json")
-						  .setHeader("Date","xxxx")
-						  .setHeader("Authorization","xxxx")
+						  .setHeaders(headers)
 						  .setBody("/requestBody.json")
-						  .getResponse();
+						  .send();
 		
-		//検証
+		/* 検証 */
 		assertThat(reponse.getHeader("Content-Type"),is("application/json"));
 		assertThat(reponse.getStatusCode(),is(200));
 		assertThat(reponse.getBody(),is(expectedBody("/expectedBody.json")));
@@ -42,8 +46,8 @@ public class BookResourceTest {
 		//リクエストボディ
 		request.setBody(getRequestBody("/requestBody.json"));
 		
-		/* リクエスト＆レスポンス */
-		response = request.getResponse();
+		/* リクエスト送信、レスポンス取得 */
+		response = request.send();
 		
 		/* 検証 */
 		assertThat(reponse.getHeader("Content-Type"),is("application/json"));
