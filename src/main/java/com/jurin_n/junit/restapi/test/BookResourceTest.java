@@ -1,10 +1,11 @@
 package com.jurin_n.junit.restapi.test;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.core.Is.is;
 
 import org.junit.Test;
 
-public class BookResourceTest {
+public class BookResourceTest extends RestApiTest {
 
 
 	@Test
@@ -20,13 +21,13 @@ public class BookResourceTest {
 		response = request.setResource("/hoge")
 						  .setMethod("GET")
 						  .setHeaders(headers)
-						  .setBody("/requestBody.json")
+						  .setBody(getRequestBody("/requestBody.json"))
 						  .send();
 		
 		/* 検証 */
-		assertThat(reponse.getHeader("Content-Type"),is("application/json"));
-		assertThat(reponse.getStatusCode(),is(200));
-		assertThat(reponse.getBody(),is(expectedBody("/expectedBody.json")));
+		assertThat(response.getHeader("Content-Type"),is("application/json"));
+		assertThat(response.getStatusCode(),is(200));
+		assertThat(response.getBody(),is(expectedBody("/expectedBody.json")));
 	}
 
 	
@@ -50,8 +51,8 @@ public class BookResourceTest {
 		response = request.send();
 		
 		/* 検証 */
-		assertThat(reponse.getHeader("Content-Type"),is("application/json"));
-		assertThat(reponse.getStatusCode(),is(200));
-		assertThat(reponse.getBody(),is(expectedBody("/expectedBody.json")));
+		assertThat(response.getHeader("Content-Type"),is("application/json"));
+		assertThat(response.getStatusCode(),is(200));
+		assertThat(response.getBody(),is(expectedBody("/expectedBody.json")));
 	}
 }
