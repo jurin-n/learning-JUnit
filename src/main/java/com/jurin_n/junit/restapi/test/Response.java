@@ -9,23 +9,23 @@ public class Response {
 	private final String body;
 	
 	public Response(
-			 int statusCode
-			,HashMap<String,String> headers
-			,String body){
+			  int statusCode
+			, HashMap<String, String> headers
+			, String body){
 		this.statusCode = statusCode;
 		this.headers = (HashMap<String,String>)headers.clone();
 		this.body = body;
 	}
-	
-	public String getHeader(String key) {
+
+	public final String getHeader(String key) {
 		return headers.get(key);
 	}
 
-	public int getStatusCode() {
+	public final int getStatusCode() {
 		return statusCode;
 	}
 
-	public String getBody() {
+	public final String getBody() {
 		return body;
 	}
 }

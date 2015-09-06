@@ -33,124 +33,109 @@ public class RestApiTest {
 	protected Map<String, String> headers = new HashMap<>();
 	String body;
 	ObjectMapper mapper = new ObjectMapper();
-	
+
 	protected RestApiTest(){
 		super();
 		Reader fr;
 		try {
 			fr = new FileReader(
-					  System.getProperty("user.dir")
-					+ "/src/main/resources/rest_api_test.properties"
+				  System.getProperty("user.dir")
+				+ "/src/main/resources/rest_api_test.properties"
 					);
 			Properties p = new Properties();
 			p.load(fr);
 			baseUri = p.getProperty("baseUri");
 
 		} catch (IOException e) {
-			throw new IllegalStateException("rest_api_test.propertiesが読み込めません。");
+			throw new IllegalStateException(
+					"rest_api_test.propertiesが読み込めません。");
 		}
 	}
-	
+
 	protected String getResourceFile(String source) throws IOException{
-		String bodyTmp="";
+		String bodyTmp = "";
 		List<String> lines = Files.readAllLines(
 				 Paths.get(
-					System.getProperty("user.dir") + "/testdata/" + source)
-				,StandardCharsets.UTF_8);
-		for(String line : lines){
+				  System.getProperty("user.dir") + "/testdata/" + source)
+				, StandardCharsets.UTF_8);
+		for (String line : lines) {
 			bodyTmp += line;
 		}
-		
+
 		//bodyTmpには整形したJSONが入る可能性がある。
 		//assertするため改行やスペースなど除去。
 		JsonNode jn = mapper.readTree(bodyTmp);
-		return mapper.writeValueAsString(jn);	
+		return mapper.writeValueAsString(jn);
 	}
-	protected String getRequestBody(String source){
-		try {
-			return getResourceFile(
-					System.getProperty("user.dir") + "/testdata/" + source
-					);
-		} catch (IOException e) {
-			throw new IllegalStateException(source + "が見つかりません。");
-		}
-	}
-	
-	protected String expectedBody(String source){
-		try {
-			return getResourceFile(
-					System.getProperty("user.dir") + "/testdata/" + source
-					);
-		} catch (IOException e) {
-			throw new IllegalStateException(source + "が見つかりません。");
-		}
-	}
-	
-	protected Response send() throws ClientProtocolException, IOException {
+
+	protected final Response send() 
+			throws ClientProtocolException, IOException {
 		String uri = baseUri + resource;
-		
+
 	   	Header[] headersTmp = new Header[headers.size()];
-	   	int index=0;
-	   	for(String key : headers.keySet()){
-	   		headersTmp[index]= new BasicHeader(key,headers.get(key));
+	   	int index = 0;
+	   	for (String key : headers.keySet()) {
+	   		headersTmp[index] = new BasicHeader(key ,headers.get(key));
 	   		index++;
 	   	}
-		switch(method){
+		switch (method) {
 			case GET:
 			   	responseTmp = Request
-						        .Get(uri)
-						        .setHeaders(headersTmp)
-						        .execute();
+			   			.Get(uri)
+			   			.setHeaders(headersTmp)
+			   			.execute();
 				break;
 			case POST:
 			   	responseTmp = Request
-						        .Post(uri)
-						        .setHeaders(headersTmp)
-						        .body(
-						        	new StringEntity(
-						       			 body
-						        		,StandardCharsets.UTF_8)
-						        		)
-						        .execute();
+			   			.Post(uri)
+			   			.setHeaders(headersTmp)
+			   			.body(
+			   				new StringEntity(
+			   					  body
+			   					, StandardCharsets.UTF_8)
+					   	)
+			   			.execute();
 				break;
 			case PUT:
 			   	responseTmp = Request
-						        .Put(uri)
-						        .setHeaders(headersTmp)
-						        .body(
-							        	new StringEntity(
-							       			 body
-							        		,StandardCharsets.UTF_8)
-							        		)
-						        .execute();
+			   			.Put(uri)
+			   			.setHeaders(headersTmp)
+			   			.body(
+					   		new StringEntity(
+						   		  body
+						   		, StandardCharsets.UTF_8)
+					   			)
+			   			.execute();
 				break;
 			case DELETE:
 			   	responseTmp = Request
-						        .Delete(uri)
-						        .setHeaders(headersTmp)
-						        .execute();
+			   			.Delete(uri)
+			   			.setHeaders(headersTmp)
+			   			.execute();
 				break;
 		}
 
-		
 		HttpResponse httpResponse = responseTmp.returnResponse();
         if (responseTmp != null) {
         	responseTmp.discardContent();
         }
-        
+
 		int statusCode = httpResponse.getStatusLine().getStatusCode();
-		String responseBody = EntityUtils.toString(httpResponse.getEntity(),StandardCharsets.UTF_8);
+		String responseBody
+			= EntityUtils.toString(
+					  httpResponse.getEntity()
+					, StandardCharsets.UTF_8);
 		Header[] responseHeadersTmp = httpResponse.getAllHeaders();
 		HashMap<String, String> responseHeaders = new HashMap<>();
-		for(int i = 0; i < responseHeadersTmp.length;i++){
+		for (int i = 0; i < responseHeadersTmp.length; i++) {
 			responseHeaders.put(
-					 responseHeadersTmp[i].getName()
-					,responseHeadersTmp[i].getValue());
+					  responseHeadersTmp[i].getName()
+					, responseHeadersTmp[i].getValue());
 		}
 		return new Response(
-				 statusCode
-				,responseHeaders
-				,responseBody
+				  statusCode
+				, responseHeaders
+				, responseBody
 				);
 	}
 }
