@@ -34,6 +34,22 @@ public class Customer {
 		return result;
 	}
 	
+	public String htmlStatement(){
+		String result = "<h1>Rental Record for <strong>" + getName() + "</strong></h1>\n";
+		for(Rental rental : rentals){			
+			//この貸し出しに関する数値の表示
+			result += rental.getMovie().getTitle() + ":" +
+					rental.getCharge() + "<br/>\n";
+		}
+		
+		//フッタ部分の追加
+		result += "<p>You owe <strong>" + getTotalCharge() + "</strong>\n";
+		result += "On this rental you earned <strong>"
+				 + getTotalFrequentRenterPoints()
+				 + "</strong> frequent renter points</p>";
+		return result;
+	}
+	
 	private double getTotalCharge(){
 		double result = 0;
 		for(Rental rental : rentals){
