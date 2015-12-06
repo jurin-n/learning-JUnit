@@ -25,5 +25,28 @@ public class Movie {
 		this.priceCode = priceCode;
 	}
 	
+	double getCharge(int daysRented){
+		double result = 0;
+		
+		//一行ごとに金額を計算
+		switch(priceCode){
+			case Movie.REGULAR:
+				result += 2;
+				if(daysRented >= 2){
+					result  += (daysRented -2) * 1.5;
+				}
+				break;
+			case Movie.NEW_RELEASE:
+				result += daysRented * 3;
+				break;
+			case Movie.CHILDRENS:
+				result += 1.5;
+				if(daysRented > 3){
+					result += (daysRented - 3) * 1.5;
+				}
+				break;
+		}
+		return result;
+	}
 	
 }
