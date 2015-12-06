@@ -20,23 +20,34 @@ public class Customer {
 	}
 	
 	public String statement(){
-		double totalAmount = 0;
-		int frequentRenterPoints = 0;
 		String result = "Rental Record for " + getName() + "\n";
 		for(Rental rental : rentals){			
-			//レンタルポイントを加算
-			frequentRenterPoints += rental.getFrequentRenterPoints();
-			
 			//この貸し出しに関する数値の表示
 			result += "\t" + rental.getMovie().getTitle() + "\t" +
 					rental.getCharge() + "\n";
-			totalAmount += rental.getCharge();
 		}
 		
 		//フッタ部分の追加
-		result += "Amount owed is " + totalAmount + "\n";
-		result += "You earned " + frequentRenterPoints +
+		result += "Amount owed is " + getTotalCharge() + "\n";
+		result += "You earned " + getTotalFrequentRenterPoints() +
 				" frequent renter points";
+		return result;
+	}
+	
+	private double getTotalCharge(){
+		double result = 0;
+		for(Rental rental : rentals){
+			result += rental.getCharge();
+		}
+		return result;
+	}
+	
+	private int getTotalFrequentRenterPoints(){
+		int result = 0;
+		for(Rental rental : rentals){
+			//レンタルポイントを加算
+			result += rental.getFrequentRenterPoints();
+		}
 		return result;
 	}
 }
