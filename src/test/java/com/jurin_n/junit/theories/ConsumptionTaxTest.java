@@ -9,10 +9,13 @@ import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
+import java.io.InputStream;
+
 @RunWith(Enclosed.class)
 public class ConsumptionTaxTest {
 	@RunWith(Theories.class)
 	public static class 一般的な状態の場合 {
+		//TODO getClass().getResourceAsStream("testData.txt"); など外部ファイルよりfixture取得できないか検討
 		@DataPoints
 		public static Fixture[] FIXTURES = new Fixture[]{
 			 new Fixture(5, 100, 105)
@@ -21,7 +24,7 @@ public class ConsumptionTaxTest {
 			,new Fixture(5, 50, 52)
 			,new Fixture(3, 50, 51)
 		};
-		
+
 		@Theory
 		public void applyで消費税が加算された価格が取得できる(Fixture fixture){
 			ConsumptionTax sut = new ConsumptionTax(fixture.taxRate);
