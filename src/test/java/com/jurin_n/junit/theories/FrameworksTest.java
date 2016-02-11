@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
@@ -30,12 +29,14 @@ public class FrameworksTest {
 	public TestWatcher testWatcher = new TestWatcher(){
 		@Override
 		protected void starting(Description description){
-			Logger.getAnonymousLogger().info(description.getMethodName() + " start");
+			Logger.getAnonymousLogger().info(
+					description.getMethodName() + " start");
 		}
 		
 		@Override
 		protected void finished(Description description){
-			Logger.getAnonymousLogger().info(description.getMethodName() + " finished");
+			Logger.getAnonymousLogger().info(
+					description.getMethodName() + " finished");
 		}
 	};
 	
@@ -49,7 +50,9 @@ public class FrameworksTest {
 	
 	@BeforeClass
 	public static void setUpClass() throws IOException{
-		Path path = Paths.get("src/test/resources/com/jurin_n/junit/theories/support.txt");
+		Path path = Paths.get(
+				"src/test/resources/com/jurin_n/junit/theories/support.txt"
+				);
 		List<String> lines 
 			= Files.readAllLines(path, Charset.forName("UTF-8")); //Shift-JISの場合は、MS932 指定？
 		for(String line:lines){
