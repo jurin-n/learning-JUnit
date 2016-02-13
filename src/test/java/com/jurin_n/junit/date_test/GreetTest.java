@@ -45,9 +45,8 @@ public class GreetTest {
 		//朝(05:00:00以上 12:00:00未満)の場合、「おはようございます」と返す
 		@Theory
 		public void 朝05時以上_12時未満_の場合_おはようございます_と返す(Calendar cal) {
-			Greeter sut = new Greeter();
 			System.out.println(testDataLoggin(cal));
-			assertThat(cal.toString(), sut.greet(cal), is("おはようございます"));
+			assertThat(cal.toString(), Greeter.greet(cal), is("おはようございます"));
 		}
 	};
 
@@ -77,9 +76,8 @@ public class GreetTest {
 		//昼(12:00:00以上 18:00:00未満)の場合、「こんにちは」と返す
 		@Theory
 		public void 昼12時以上_18時未満_の場合_こんにちは_と返す(Calendar cal) {
-			Greeter sut = new Greeter();
 			System.out.println(testDataLoggin(cal));
-			assertThat(cal.toString(), sut.greet(cal), is("こんにちは"));
+			assertThat(cal.toString(), Greeter.greet(cal), is("こんにちは"));
 		}
 	};
 	
@@ -121,9 +119,8 @@ public class GreetTest {
 		//夜(18:00:00以上 05:00:00未満)の場合、「こんばんは」と返す/
 		@Theory
 		public void 夜18時以上_05時未満_の場合_こんばんは_と返す(Calendar cal) {
-			Greeter sut = new Greeter();
 			System.out.println(testDataLoggin(cal));
-			assertThat(cal.toString(), sut.greet(cal), is("こんばんは"));
+			assertThat(cal.toString(), Greeter.greet(cal), is("こんばんは"));
 		}
 	};
 	static String testDataLoggin(Calendar cal){
