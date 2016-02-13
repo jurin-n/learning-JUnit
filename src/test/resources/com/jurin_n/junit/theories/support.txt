@@ -2,11 +2,14 @@ GlassFish	Oracle	true
 GlassFish	DB2	true
 GlassFish	PostgreSQL	true
 GlassFish	MySQL	true
+GlassFish	Derby	true
 JBoss	Oracle	false
 JBoss	DB2	true
 JBoss	PostgreSQL	true
 JBoss	MySQL	false
+JBoss	Derby	true
 Tomcat	Oracle	false
 Tomcat	DB2	false
 Tomcat	PostgreSQL	false
 Tomcat	MySQL	true
+Tomcat	Derby	true

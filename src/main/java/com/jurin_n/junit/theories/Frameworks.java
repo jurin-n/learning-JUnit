@@ -9,9 +9,9 @@ public class Frameworks {
 		case GlassFish:
 			return true;
 		case Tomcat:
-			return db == Database.MySQL;
+			return db == Database.MySQL || db == Database.Derby;
 		case JBoss:
-			return db == Database.DB2 || db == Database.PostgreSQL;
+			return db == Database.DB2 || db == Database.PostgreSQL || db == Database.Derby;
 		default:
 			return false;
 		}
