@@ -3,6 +3,8 @@ package com.jurin_n.junit.date_test;
 import static org.junit.Assert.*;
 
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
@@ -25,8 +27,18 @@ public class GreetTest {
 		@BeforeClass
 		public static void setUpCalendar() {
 			CALENDAR = new Calendar[]{
-					 newCalendar(Calendar.getInstance(),5,0,0,0)
-					,newCalendar(Calendar.getInstance(),11,59,59,999)
+					 newCalendar(
+							  Calendar.getInstance(
+									   TimeZone.getTimeZone("Asia/Tokyo")
+									  ,Locale.JAPAN
+									  )
+							 ,5,0,0,0)
+					,newCalendar(
+							  Calendar.getInstance(
+									   TimeZone.getTimeZone("Asia/Tokyo")
+									  ,Locale.JAPAN
+									  )
+							,11,59,59,999)
 					};
 		}
 
@@ -47,8 +59,18 @@ public class GreetTest {
 		@BeforeClass
 		public static void setUpCalendar() {
 			CALENDAR = new Calendar[]{
-					 newCalendar(Calendar.getInstance(),12,0,0,0)
-					,newCalendar(Calendar.getInstance(),17,59,59,999)
+					 newCalendar(
+							  Calendar.getInstance(
+								   TimeZone.getTimeZone("Asia/Tokyo")
+								  ,Locale.JAPAN
+								  )
+							 ,12,0,0,0)
+					,newCalendar(
+							  Calendar.getInstance(
+									   TimeZone.getTimeZone("Asia/Tokyo")
+									  ,Locale.JAPAN
+									  )
+							,17,59,59,999)
 					};
 		}
 		
@@ -69,10 +91,30 @@ public class GreetTest {
 		@BeforeClass
 		public static void setUpCalendar() {
 			CALENDAR = new Calendar[]{
-					 newCalendar(Calendar.getInstance(),18,0,0,0)
-					,newCalendar(Calendar.getInstance(),23,59,59,999)
-					,newCalendar(Calendar.getInstance(),0,0,0,0)
-					,newCalendar(Calendar.getInstance(),4,59,59,999)
+					 newCalendar(
+							  Calendar.getInstance(
+									   TimeZone.getTimeZone("Asia/Tokyo")
+									  ,Locale.JAPAN
+									  )
+							 ,18,0,0,0)
+					,newCalendar(
+							  Calendar.getInstance(
+									   TimeZone.getTimeZone("Asia/Tokyo")
+									  ,Locale.JAPAN
+									  )
+							 ,23,59,59,999)
+					,newCalendar(
+							 Calendar.getInstance(
+									   TimeZone.getTimeZone("Asia/Tokyo")
+									  ,Locale.JAPAN
+									  )
+							,0,0,0,0)
+					,newCalendar(
+							 Calendar.getInstance(
+									   TimeZone.getTimeZone("Asia/Tokyo")
+									  ,Locale.JAPAN
+									  )
+							,4,59,59,999)
 					};
 		}
 		
