@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
@@ -123,6 +124,33 @@ public class GreetTest {
 			assertThat(cal.toString(), Greeter.greet(cal), is("こんばんは"));
 		}
 	};
+	
+	public static class Calenderクラス動作確認{
+		@Test
+		public void test() throws InterruptedException{
+			Calendar now = Calendar.getInstance(
+					   TimeZone.getTimeZone("Asia/Tokyo")
+					  ,Locale.JAPAN
+					  );
+			Calendar mock = newCalendar(
+					 Calendar.getInstance(
+							   TimeZone.getTimeZone("Asia/Tokyo")
+							  ,Locale.JAPAN
+							  )
+					,4,59,59,999);
+			System.out.println("now=" + testDataLoggin(now));
+			System.out.println("mock=" + testDataLoggin(mock));
+			
+			Thread.sleep(2000L);
+
+			//TODO Calendar.getInstanceはインスタンス作成した時点の時刻になる。
+			//     同一インスタンスを2秒後につかっても時間は作成したタイミングになる。
+			//     nowやmockにあたる呼び出しを行うクラスの作成が必要。
+			System.out.println("2秒後 now=" + testDataLoggin(now));
+			System.out.println("2秒後 mock=" + testDataLoggin(mock));
+		}
+	};
+	
 	static String testDataLoggin(Calendar cal){
 		return "[testing・・・]"
 				+ " HOUR_OF_DAY=" + cal.get(Calendar.HOUR_OF_DAY)
