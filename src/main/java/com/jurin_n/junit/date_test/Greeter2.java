@@ -1,10 +1,10 @@
 package com.jurin_n.junit.date_test;
 
 public class Greeter2 {
-	public SystemCalendar sysCal = new DefaultSystemCalendar();
+	public DateTime dateTime = new MachineDateTime();
 	
 	public String greet() {
-		int hour = sysCal.getHour();
+		int hour = dateTime.getHour();
 		if(hour>=5 && hour<12){
 			return "おはようございます";
 		}else if(hour>=12 && hour<18){
@@ -13,7 +13,7 @@ public class Greeter2 {
 		return "こんばんは";
 	}
 
-	public void setSystemCalendar(SystemCalendar sysCal) {
-		this.sysCal = sysCal;
+	public void setDateTime(DateTime dateTime) {
+		this.dateTime = dateTime;
 	}
 }

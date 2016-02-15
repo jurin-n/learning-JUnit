@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class DefaultSystemCalendar implements SystemCalendar {
+public class MachineDateTime implements DateTime {
 
 	private Calendar cal = Calendar.getInstance(
 								 TimeZone.getTimeZone("Asia/Tokyo")
