@@ -10,14 +10,14 @@ public class MachineDateTime implements DateTime {
 	private Calendar cal = Calendar.getInstance(
 								 TimeZone.getTimeZone("Asia/Tokyo")
 								,Locale.JAPAN);
-
-	@Override
-	public int getHour() {
-		setCurrentTime(cal);
-		return cal.get(Calendar.HOUR_OF_DAY);
+	
+	Date newDate(){
+		return new Date();
 	}
 	
-	private void setCurrentTime(Calendar cal){
-		cal.setTime(new Date());
+	@Override
+	public int getHour() {
+		cal.setTime(newDate());
+		return cal.get(Calendar.HOUR_OF_DAY);
 	}
 }
